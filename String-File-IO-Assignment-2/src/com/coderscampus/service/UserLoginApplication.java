@@ -1,36 +1,26 @@
 package com.coderscampus.service;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
-
-import com.coderscampus.userpojo.User;
 import com.coderscampus.service.UserService;
+import com.coderscampus.userpojo.User;
 
 public class UserLoginApplication
 {
+	//static variables that belong to the class
+	static User[] users = new User[4];
+	static String userEmail;
+	static String userPassword;
+	
 	/* the main method which executes the program */
 	public static void main(String[] args)
 	{
-		// creation of new user object and new service object
-		User user = new User();
+		// creation of new UserService object
 		UserService us = new UserService();
 		
-		// initialize unsuccessful attempts
-		int numberOfUnsuccessfulAttempts = 0;
+		// static users array to retrieve users from data.txt file
+		users = us.readInputFromTextFile();
 		
-		// begin the program by loading 'data.txt' file into
-		// an array of User objects
-		us.readInputFromTextFile();
-		
-		// continue to prompt user if login unsuccessful
-		while (numberOfUnsuccessfulAttempts < 5)
-		{
-		// prompt the user for input
-		us.promptUser();
-		}
-	
+		// prompt the user for input to compare against the 
+		// array of user objects
+		us.promptUserAndValidateInput();		
 	}
 }
